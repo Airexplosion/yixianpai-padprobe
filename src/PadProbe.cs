@@ -36,7 +36,7 @@ namespace YxPadProbe
 
         public override void OnLoad(ModContext ctx)
         {
-            ctx.Log.Info("手柄探针已加载：插上手柄，推摇杆 / 按键看日志。先在这里 dump 一次游戏定义的轴。");
+            ctx.Log.Info(ctx.T("手柄探针已加载：插上手柄，推摇杆 / 按键看日志。先在这里 dump 一次游戏定义的轴。", "Gamepad probe loaded: plug in a controller, move sticks / press buttons to see logs. Dumping the game's defined axes once now."));
             DumpDefinedAxes(ctx);
         }
 
@@ -48,11 +48,11 @@ namespace YxPadProbe
 
             // 按下的按钮（任意手柄）。
             string buttons = DownButtons();
-            if (buttons.Length > 0) Context.Log.Info("按钮按下：" + buttons);
+            if (buttons.Length > 0) Context.Log.Info(Context.T("按钮按下：", "Buttons down: ") + buttons);
 
             // 明显偏离中心的轴（|v|>0.3）——推摇杆时这里应该出现对应轴。
             string axes = ActiveAxes();
-            if (axes.Length > 0) Context.Log.Info("轴：" + axes);
+            if (axes.Length > 0) Context.Log.Info(Context.T("轴：", "Axes: ") + axes);
         }
 
         void DumpDefinedAxes(ModContext ctx)
@@ -67,7 +67,7 @@ namespace YxPadProbe
                     float v = Input.GetAxisRaw(name);
                     _definedAxes.Add(name);
                     // 读到了（没抛）= 游戏定义了这个轴。当前值一并记下。
-                    ctx.Log.Info("定义了轴：" + name + " = " + v.ToString("0.00", CultureInfo.InvariantCulture));
+                    ctx.Log.Info(ctx.T("定义了轴：", "Defined axis: ") + name + " = " + v.ToString("0.00", CultureInfo.InvariantCulture));
                 }
                 catch (Exception)
                 {
@@ -75,7 +75,7 @@ namespace YxPadProbe
                 }
             }
             string count = _definedAxes.Count.ToString(CultureInfo.InvariantCulture);
-            ctx.Log.Info("游戏一共定义了 " + count + " 个可读轴（右摇杆若在其中，推动它会在上面出现非零值）。");
+            ctx.Log.Info(ctx.T("游戏一共定义了 ", "The game defines ") + count + ctx.T(" 个可读轴（右摇杆若在其中，推动它会在上面出现非零值）。", " readable axes (if the right stick is among them, moving it will show a non-zero value above)."));
         }
 
         string DownButtons()
