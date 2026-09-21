@@ -1,0 +1,11 @@
+{
+  "id": "com.yx.padprobe",
+  "name": "手柄探针",
+  "version": "0.1.0",
+  "author": "yxp",
+  "description": "诊断用:每帧读 Unity Input 的手柄状态(手柄名/按钮/各轴),把非零的打到日志。用来确认 Unity 能不能读到右摇杆。插上手柄推摇杆看日志。",
+  "sdkVersion": ">=1.0.0 <2.0.0",
+  "sandboxOnly": false,
+  "entry": "plugins/PadProbe.dll",
+  "entryType": "YxPadProbe.PadProbeMod"
+}
